@@ -5,4 +5,6 @@ def sqrt(x):
     return y
 
 
-print(sqrt(67566878))
+# x >= 0
+print(sqrt(1))
+
