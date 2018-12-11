@@ -70,15 +70,113 @@ class Person:
         )
 
 
+class Student(Person):
+    _id_num = 0
+
+    @classmethod
+    def _id_gen(cls):  # 实现学生号生成规则
+        cls._id_num += 1
+        year = datetime.date.today().year
+        return '1{:04}{:05}'.format(year, cls._id_num)
+
+    def __init__(self, name, sex, birthday, department):
+        # 三种初始化父类方法
+        Person.__init__(self, name, sex, birthday, Student._id_gen())
+        # super(Student, self).__init__(name, sex, birthday, Student._id_gen())  # python2
+        # super().__init__(name, sex, birthday, Student._id_gen())  # python3
+        self._department = department
+        self._enroll_date = datetime.date.today()
+        self._courses = {}  # 一个空字典
+
+    def set_course(self, course_name):
+        self._courses[course_name] = None
+
+    def set_score(self, course_name, score):
+        if course_name not in self._courses:
+            raise PersonValueError('No this course selected:', course_name)
+        self._courses[course_name] = score
+
+    def scores(self):
+        return [(cname, self._courses[cname]) for cname in self._courses]
+
+    def details(self):
+        return ', '.join(
+            (
+                Person.details(self),
+                '入学日期: ' + str(self._enroll_date),
+                '院系: ' + self._department,
+                '课程记录: ' + str(self.scores())
+            )
+        )
+
+
+class Staff(Person):
+    _id_num = 0
+
+    @classmethod
+    def _id_gen(cls, birthday):
+        cls._id_num += 1
+        birth_year = datetime.date(*birthday).year
+        return '0{:04}{:05}'.format(birth_year, cls._id_num)
+
+    def __init__(self, name, sex, birthday, entry_date=None):
+        super().__init__(name, sex, birthday, Staff._id_gen(birthday))
+        if entry_date:
+            try:
+                self._entry_date = datetime.date(*entry_date)
+            except Exception as e:
+                str(e)
+                raise PersonValueError('Wrong date: ', entry_date)
+        else:
+            self._entry_date = datetime.date.today()
+        self._salary = 1720
+        self._department = '未定'
+        self._position = '未定'
+
+    def set_salary(self, amount):
+        if not type(amount) is int:
+            raise TypeError
+        self._salary = amount
+
+    def set_position(self, position):
+        self._position = position
+
+    def set_department(self, department):
+        self._department = department
+
+    def details(self):
+        return ', '.join(
+            (
+                super().details(),
+                '入职日期: ' + str(self._entry_date),
+                '院系: ' + self._department,
+                '职位: ' + self._position,
+                '工资: ' + str(self._salary)
+            )
+        )
+
+
+'''
 p1 = Person('谢雨洁', '女', (1995, 7, 30), '1201510111')
 p2 = Person('汪力强', '男', (1990, 2, 17), '1201380324')
 p3 = Person('张子玉', '女', (1974, 10, 16), '0197401032')
-p4 = Person('李国栋', '男', (2008, 5, 24), '0196212018')
+p4 = Student('李国栋', '男', (2008, 5, 24), '0196212018')
 plist2 = [p1, p2, p3, p4]
 for p in plist2:
     print(p)
 
 print('\nAnother sorting:')
 plist2.sort()
+# plist2.sort(reverse=True)
 for p in plist2:
     print(p.details())
+'''
+p1 = Staff('张子玉', '女', (1974, 10, 16))
+p2 = Staff('李国栋', '男', (2008, 5, 24))
+print(p1)
+print(p2)
+p1.set_department('数学')
+p1.set_position('副教授')
+p1.set_salary(8400)
+print(p1.details())
+print(p2.details())
