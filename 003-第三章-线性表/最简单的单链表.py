@@ -13,8 +13,9 @@ for i in range(2, 11):
 
 p = llist1
 
-while p is not None:
+# while p is not None:
+while p:
     print(p.elem)
     p = p.next_
-    
+
 print(llist1)
