@@ -63,6 +63,18 @@ class LList:
                 return p.elem
             p = p.next_
 
+    def filter(self, pred):
+        """
+        find的升级版
+        找到满足条件pred的某个元素
+        pred函数另行定义
+        """
+        p = self._head
+        while p:
+            if pred(p.elem):
+                yield p.elem
+            p = p.next_
+
     def printall(self):
         p = self._head
         while p:  # ===> while p i not None:
@@ -90,20 +102,21 @@ class LList:
             p = p.next_
 
 
-mlist1 = LList()
+if __name__ == '__main__':
+    mlist1 = LList()
 
-# 链首插入元素
-for i in range(10):
-    mlist1.prepend(i)
+    # 链首插入元素
+    for i in range(10):
+        mlist1.prepend(i)
 
-# 尾部插入元素
-for i in range(11, 20):
-    mlist1.append(i)
-mlist1.printall()
+    # 尾部插入元素
+    for i in range(11, 20):
+        mlist1.append(i)
+    mlist1.printall()
 
-# 遍历操作
-mlist1.for_each(print)
+    # 遍历操作
+    mlist1.for_each(print)
 
-# 迭代列表
-for x in mlist1.elements():
-    print(x)
+    # 迭代列表
+    for x in mlist1.elements():
+        print(x)
