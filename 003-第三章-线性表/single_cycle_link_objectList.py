@@ -1,6 +1,6 @@
-from single_chain_class import LNode
-from single_chain_class import LList
-from single_chain_class import LinkedListUnderflow
+from single_link_class import LNode
+# from single_chain_class import LList
+from single_link_class import LinkedListUnderflow
 
 
 class LCList:  # 循环单链表类
@@ -70,24 +70,27 @@ class LCList:  # 循环单链表类
 if __name__ == '__main__':
     mlist1 = LCList()
 
-    # 链首插入元素
-    for i in range(10):
-        mlist1.prepend(i)
+    mlist1.prepend(999)
 
-    # 尾部插入元素
-    for i in range(11, 20):
-        mlist1.append(i)
+    # # 链首插入元素
+    # for i in range(10):
+    #     mlist1.prepend(i)
+
+    # # 尾部插入元素
+    # for i in range(11, 20):
+    #     mlist1.append(i)
+    # mlist1.printall()
     mlist1.printall()
+
+    # mlist1.pop()
+    # mlist1.printall()
 
     # mlist1.pop()
     # mlist1.printall()
 
     mlist1.pop_last()
     mlist1.printall()
-    #
-    # 遍历操作
-    # mlist1.for_each(print)
-    #
-    # # 迭代列表
-    # for x in mlist1.elements():
-    #     print(x)
+
+    mlist1.pop_last()
+    mlist1.printall()
+

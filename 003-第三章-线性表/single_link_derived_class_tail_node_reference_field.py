@@ -1,6 +1,6 @@
-from single_chain_class import LList
-from single_chain_class import LNode
-from single_chain_class import LinkedListUnderflow
+from single_link_class import LList
+from single_link_class import LNode
+from single_link_class import LinkedListUnderflow
 from random import randint
 
 
