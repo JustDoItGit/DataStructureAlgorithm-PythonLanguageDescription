@@ -68,5 +68,7 @@ if __name__ == '__main__':
         print(x)
 
     mlist1.printall()
+    mlist1.pop()
+    mlist1.printall()
     mlist1.pop_last()
     mlist1.printall()
