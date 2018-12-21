@@ -9,6 +9,6 @@ double_cycle_link_list------循环双链表
   
   
 ## 链表对象需要关注的三点:  
-head: _head头元素的prev为None  
-end: _rear元素的next_为None  
-NULL: 空表的head,end……所有属性都为None  
+`head`: _head头元素的prev为None  
+`end`: _rear元素的next_为None  
+`NULL`: 空表的head,end……所有属性都为None  

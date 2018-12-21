@@ -17,9 +17,9 @@ class DLCList:
         p = DLNode(elem)  # 注意关注这里p的节点创建
         if self._rear is None:
             # 建立一个节点的环
-            p.next_ = p
-            p.prev = p
             self._rear = p
+            self._rear.next_ = p
+            self._rear.prev = p
         else:
             # 原对象的首元素 变为 首节点p 的下一个元素
             p.next_ = self._rear.next_
@@ -49,7 +49,7 @@ class DLCList:
             self._rear = None
         else:
             p.next_ = self._rear.next_
-            self._rear.next_.prev = p
+            self._rear = p
 
     def printall(self):
         if self.is_empty():
@@ -72,24 +72,23 @@ if __name__ == '__main__':
     mlist1.prepend(999)
     mlist1.printall()
 
-    # 链首插入元素
-    for i in range(10):
-        mlist1.prepend(i)
+    # # 链首插入元素
+    # for i in range(10):
+    #     mlist1.prepend(i)
+    #
+    # # 尾部插入元素
+    # for i in range(11, 20):
+    #     mlist1.append(i)
+    # mlist1.printall()
 
-    # 尾部插入元素
-    for i in range(11, 20):
-        mlist1.append(i)
-    mlist1.printall()
-
-    mlist1.pop()
-    mlist1.printall()
-
-    mlist1.pop()
-    mlist1.printall()
-
-
-    mlist1.pop_last()
-    mlist1.printall()
+    # mlist1.pop()
+    # mlist1.printall()
+    #
+    # mlist1.pop()
+    # mlist1.printall()
 
     mlist1.pop_last()
     mlist1.printall()
+
+    # mlist1.pop_last()
+    # mlist1.printall()
