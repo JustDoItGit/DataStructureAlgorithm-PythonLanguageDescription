@@ -7,4 +7,5 @@ def reverse(lst):
     return elems
 
 
-print(reverse([4, 3, 2, 6]))
+if __name__ == '__main__':
+    print(reverse([4, 3, 2, 6]))
