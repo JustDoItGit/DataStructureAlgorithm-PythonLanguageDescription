@@ -6,7 +6,7 @@ simplest_single_link_node_class------最简单的单链表节点类
 single_cycle_link_objectList------循环单链表类  
 double_link_list------双向链表，双链表  
 double_cycle_link_list------循环双链表  
-  
+josephus.py------Josephus约瑟夫环问题    
   
 ## 链表对象需要关注的三点:  
 `head`: _head头元素的prev为None  
