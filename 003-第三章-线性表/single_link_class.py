@@ -101,6 +101,35 @@ class LList:
             yield p.elem
             p = p.next_
 
+    def rev(self):
+        """ 高效的链表反转，复杂度O(n)"""
+        p = None
+        # 后面的1，2，3是假设链表长度大于2有3个节点 a1,a2,a3
+        while self._head:  # 1、True 2、True 3、True 4、None(跳出）
+            q = self._head  # 1、a1 2、a2 3、a3
+            self._head = q.next_  # 摘下原来的首节点1、head = a2 2、head = a3 3、head = None
+            q.next_ = p  # 1、a1.next_ = None 2、a2.next_ = a1 3、a3.next_ = a2
+            p = q  # 将刚摘下来的节点接入p引用的节点序列 1、p = a1 2、p = a2 3、p = a3
+        self._head = p  # 反转后的节点序列已经做好，重置表头链接
+
+    def sort1(self):
+        if self._head is None:
+            return
+
+        crt = self._head.next_  # 从首节点之后开始处理
+        while crt:
+            x = crt.elem
+            p = self._head
+            while p is not crt and p.elem <= x:  # 跳过小元素
+                p = p.next_
+            while p is not crt:  # 倒换大元素，完成元素插入的工作
+                y = p.elem
+                p.elem = x
+                x = y
+                p = p.next_
+            crt.elem = x  # 回填退后一个元素x=y
+            crt = crt.next_
+
 
 if __name__ == '__main__':
     mlist1 = LList()
@@ -114,9 +143,13 @@ if __name__ == '__main__':
         mlist1.append(i)
     mlist1.printall()
 
-    # 遍历操作
-    mlist1.for_each(print)
+    # # 遍历操作
+    # mlist1.for_each(print)
 
-    # 迭代列表
-    for x in mlist1.elements():
-        print(x)
+    # # 迭代列表
+    # for x in mlist1.elements():
+    #     print(x)
+
+    mlist1.rev()
+    mlist1.sort1()
+    mlist1.printall()
