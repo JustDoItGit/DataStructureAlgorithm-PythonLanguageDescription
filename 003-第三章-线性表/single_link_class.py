@@ -113,6 +113,7 @@ class LList:
         self._head = p  # 反转后的节点序列已经做好，重置表头链接
 
     def sort1(self):
+        """ 单链表插入排序-移动元素法 """
         if self._head is None:
             return
 
@@ -129,6 +130,30 @@ class LList:
                 p = p.next_
             crt.elem = x  # 回填退后一个元素x=y
             crt = crt.next_
+
+    def sort(self):
+        p = self._head
+        if p is None or p.next_ is None:
+            """ 被处理链表为空、或者只有一个元素，无需任何操作 """
+            return
+
+        rem = p.next_  # rem = 第2个元素
+        p.next_ = None
+        while rem:
+            p = self._head
+            q = None
+            while p and p.elem <= rem.elem:
+                """ 直到找到大于rem.elem的元素、或者p到尾部时跳出 """
+                q = p
+                p = p.next_
+            if q is None:
+                # 第一个元素就比rem.elem大表头插入
+                self._head = rem
+            else:
+                q.next_ = rem
+            q = rem
+            rem = rem.next_
+            q.next_ = p
 
 
 if __name__ == '__main__':
@@ -151,5 +176,6 @@ if __name__ == '__main__':
     #     print(x)
 
     mlist1.rev()
-    mlist1.sort1()
+    # mlist1.sort1()
+    mlist1.sort()
     mlist1.printall()
