@@ -1,4 +1,5 @@
 from single_cycle_link_objectList import LCList
+import time
 
 
 def josephus_a(n, k, m):
@@ -11,13 +12,15 @@ def josephus_a(n, k, m):
             if people[i] > 0:
                 count += 1
             if count == m:
-                print(people[i], end='')
+                # print(people[i], end='')
                 people[i] = 0
             i = (i + 1) % n  # 精髓
         if num < n - 1:
-            print(', ', end='')
+            # print(', ', end='')
+            pass
         else:
-            print('')
+            # print('')
+            pass
     return
 
 
@@ -28,13 +31,14 @@ def josephus_l(n, k, m):
     num, i = n, k - 1
     for num in range(n, 0, -1):
         i = (i + m - 1) % num
-        print(people.pop(i), end=(', ' if num > 1 else '\n'))
+        people.pop(i)
+        # print(people.pop(i), end=(', ' if num > 1 else '\n'))
 
     return
 
 
 class Josephus(LCList):
-    """ 约瑟夫环基于单链表的解O(n) + O(m*n) = O((m+1)*n)"""
+    """ 约瑟夫环基于单链表的解O(n) + O(m*n) = O((m+1)*n) """
 
     def turn(self, m):
         for i in range(m):
@@ -47,10 +51,21 @@ class Josephus(LCList):
         self.turn(k - 1)
         while not self.is_empty():
             self.turn(m - 1)
-            print(self.pop(), end='\n' if self.is_empty() else ', ')
+            self.pop()
+            # print(self.pop(), end='\n' if self.is_empty() else ', ')
 
 
 if __name__ == '__main__':
-    josephus_a(10, 2, 7)
-    josephus_l(10, 2, 7)
-    Josephus(10, 2, 7)
+    start_a = time.time()
+    josephus_a(10000, 20, 700)
+    end_a = time.time()
+    print('josephus_a cost: %fs' % (end_a - start_a))
+
+    start_l = time.time()
+    josephus_l(10000, 20, 700)
+    end_l = time.time()
+    print('josephus_l cost: %fs' % (end_l - start_l))
+    start_link = time.time()
+    Josephus(10000, 20, 700)
+    end_link = time.time()
+    print('josephus_link cost: %fs' % (end_link - start_link))
