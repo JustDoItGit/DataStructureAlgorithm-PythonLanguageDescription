@@ -2,6 +2,12 @@ class StackUnderflow(ValueError):  # 栈下溢（空栈访问）
     pass
 
 
+class LNode:
+    def __init__(self, elem, next_=None):
+        self.elem = elem
+        self.next_ = next_
+
+
 class SStack:
     """
         基于顺序表技术实现的栈类
@@ -29,11 +35,46 @@ class SStack:
         return self._elems.pop()
 
 
+class LStack:
+    """
+        基于链接表技术实现的栈类，用LNode作为节点
+    """
+
+    def __init__(self):
+        self._top = None
+
+    def is_empty(self):
+        return self._top is None
+
+    def top(self):
+        if self._top is None:
+            raise StackUnderflow('in LStack.top()')
+        return self._top.elem
+
+    def push(self, elem):
+        self._top = LNode(elem, self._top)
+
+    def pop(self):
+        if self._top is None:
+            raise StackUnderflow('in LStack.pop()')
+        p = self._top
+        self._top = p.next_
+        return p.elem
+
+
 if __name__ == '__main__':
     st1 = SStack()
     st1.push(3)
     st1.push(5)
     while not st1.is_empty():
         print(st1.pop())
-    st1.top()
-    st1.pop()
+    # st1.top()
+    # st1.pop()
+
+    st2 = LStack()
+    st2.push(3)
+    st2.push(5)
+    while not st2.is_empty():
+        print(st2.pop())
+    # st2.top()
+    # st2.pop()
