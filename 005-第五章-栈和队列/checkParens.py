@@ -36,8 +36,8 @@ def check_parens(text):
         st_i_ = ''
         st_ = ''
         while not st.is_empty():
-            st_i_ += str(st_i.pop())
-            st_ += st.pop()
+            st_i_ = str(st_i.pop()) + st_i_
+            st_ = st.pop() + st_
 
         print('Unmatching is found at', st_i_, 'for', st_)
         return False
