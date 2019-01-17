@@ -33,6 +33,7 @@ def check_parens(text):
         else:  # 这是一次括号配对成功，什么也不做，继续
             st_i.pop()
     if not st.is_empty():
+        '''
         st_i_ = ''
         st_ = ''
         while not st.is_empty():
@@ -40,6 +41,8 @@ def check_parens(text):
             st_ = st.pop() + st_
 
         print('Unmatching is found at', st_i_, 'for', st_)
+        '''
+        print('Unmatching is found at', st_i.pop(), 'for', st.pop())
         return False
     print('All parentheses are correctly matched.')
     return True
