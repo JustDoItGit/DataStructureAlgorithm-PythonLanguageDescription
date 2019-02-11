@@ -34,6 +34,16 @@ class SStack:
             raise StackUnderflow("in SStack.pop()")
         return self._elems.pop()
 
+    def printall(self):
+        while not self.is_empty():
+            print(self.pop())
+
+    def __str__(self):
+        l_tmp = []
+        while not self.is_empty():
+            l_tmp.append(str(self.pop()))
+        return ' '.join(l_tmp)
+
 
 class LStack:
     """
@@ -66,8 +76,10 @@ if __name__ == '__main__':
     st1 = SStack()
     st1.push(3)
     st1.push(5)
-    while not st1.is_empty():
-        print(st1.pop())
+    print(st1)
+    # st1.printall()
+    # while not st1.is_empty():
+    #     print(st1.pop())
     # st1.top()
     # st1.pop()
 
