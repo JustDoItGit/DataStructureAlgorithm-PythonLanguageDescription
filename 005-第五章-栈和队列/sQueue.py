@@ -49,6 +49,7 @@ if __name__ == '__main__':
     print(t_sq.is_empty())
     for j in range(10):
         t_sq.enqueue(j)
+    print('首元素:', t_sq.peek())
     for n in range(10):
         print(t_sq.dequeue())
-    print(t_sq.dequeue())
+    # print(t_sq.dequeue())
