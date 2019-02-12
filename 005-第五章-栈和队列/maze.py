@@ -1,4 +1,5 @@
 from stack import SStack
+from sQueue import SQueue
 import copy
 
 dirs = [(0, 1), (1, 0), (0, -1), (-1, 0)]
@@ -55,6 +56,36 @@ def maze_solver(maze, start, end):
     print('No path found.')  # 找不到路径
 
 
+# 队列法求解迷宫问题
+def maze_solver_queue(maze, start, end):
+    if start == end:  # 特殊情况
+        print('Path finds.')
+        return
+    path_dict = {}
+    qu = SQueue()
+    mark(maze, start)
+    qu.enqueue(start)  # start位置入队
+    while not qu.is_empty():  # 还有候选位置
+        pos = qu.dequeue()  # 取出下一位置
+        for i in range(4):  # 检查每个方向
+            nextp = (pos[0] + dirs[i][0], pos[1] + dirs[i][1])  # 列举各位置
+            if passable(maze, nextp):  # 找到新的探索方向
+                if nextp == end:  # 是出口
+                    path_dict[end] = pos
+                    print('Path find.')  # 成功!
+                    succ = end
+                    while succ != start:
+                        print(succ, end=' ')
+                        succ = path_dict[succ]
+                    else:
+                        print(succ)
+                    return
+                path_dict[nextp] = pos
+                mark(maze, nextp)
+                qu.enqueue(nextp)  # 新位置入队
+    print('No path.')  # 没有路径，失败！
+
+
 if __name__ == '__main__':
     maze_test = [
         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -69,8 +100,11 @@ if __name__ == '__main__':
         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
     ]
     maze_for_solver = copy.deepcopy(maze_test)
+    maze_for_queue = copy.deepcopy(maze_test)
     pos_test = (1, 1)
     end_test = (8, 8)
     find_path(maze_test, pos_test, end_test)
     print('')
     maze_solver(maze_for_solver, pos_test, end_test)
+    print('')
+    maze_solver_queue(maze_for_queue, pos_test, end_test)
