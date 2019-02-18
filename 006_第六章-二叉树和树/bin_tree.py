@@ -30,6 +30,35 @@ def set_right(btree, right_):
     btree[2] = right_
 
 
+def make_sum(a, b):
+    # return ('+', a, b)
+    return '+', a, b
+
+
+def make_prod(a, b):
+    return '*', a, b
+
+
+def make_diff(a, b):
+    return '-', a, b
+
+
+def make_div(a, b):
+    return '/', a, b
+
+
+def is_basic_exp(a):
+    return not isinstance(a, tuple)
+
+
+def is_number(x):
+    return isinstance(x, int) or isinstance(x, float) or isinstance(x, complex)
+
+
 if __name__ == '__main__':
     t1 = bintree(2, bintree(4), bintree(8))
     set_left(left(t1), bintree(5))
+    e1 = make_prod(3, make_sum(2, 5))
+    print(e1)
+    print(make_sum(make_prod('a', 2), make_prod('b', 7)))
+    print(is_number(3.33))
