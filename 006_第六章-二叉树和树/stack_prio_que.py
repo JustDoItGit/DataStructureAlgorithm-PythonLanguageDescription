@@ -43,14 +43,27 @@ class PrioQueue:
 
     def siftdown(self, e, begin, end):
         elems, i, j = self._elems, begin, begin * 2 + 1
-        while j < end:
+        while j < end:  # invariant: j == 2*i + 1
             if j + 1 < end and elems[j + 1] < elems[j]:
-                j += 1
-            if e < elems[j]:
+                j += 1  # elems[j]不大于其兄弟结点的数据
+            if e < elems[j]:  # e在三者中最小，已找到了位置
                 break
-            elems[i] = elems[j]
+            elems[i] = elems[j]  # elems[j]在三者中最小，上移
             i, j = j, 2 * j + 1
         elems[i] = e
 
     def buildheap(self):
-        pass
+        """ 平局复杂度O(n) """
+        end = len(self._elems)
+        for i in range(end - 1, -1, -1):
+            self.siftdown(self._elems[i], i, end)
+
+
+if __name__ == '__main__':
+    s_prio_que = PrioQueue([5, 1, 8, 2, 4, 4])
+    print(s_prio_que.peek())
+    s_prio_que.enqueue(0)
+    print(s_prio_que.dequeue())
+    print('------')
+    while not s_prio_que.is_empty():
+        print(s_prio_que.dequeue())
