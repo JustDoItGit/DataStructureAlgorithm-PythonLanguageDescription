@@ -41,5 +41,5 @@ class Event:
     def time(self):
         return self._ctime
 
-    def __trunc__(self):  # 具体事件类必须定义这个方法
+    def run(self):  # 具体事件类必须定义这个方法
         pass
