@@ -1,5 +1,5 @@
 def heap_sort(elems):
-    def siftdowm(elems, e, begin, end):
+    def siftdown(elems, e, begin, end):
         i, j = begin, begin * 2 + 1  # invariant: j == 2*i + 1
         while j < end:
             if j + 1 < end and elems[j + 1] < elems[j]:
@@ -12,11 +12,11 @@ def heap_sort(elems):
 
     end = len(elems)
     for i in range(end // 2, -1, -1):
-        siftdowm(elems, elems[i], i, end)
+        siftdown(elems, elems[i], i, end)
     for i in range(end - 1, 0, -1):
         e = elems[i]
         elems[i] = elems[0]
-        siftdowm(elems, e, 0, i)
+        siftdown(elems, e, 0, i)
 
 
 if __name__ == '__main__':
