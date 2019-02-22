@@ -53,7 +53,10 @@ class PrioQueue:
         elems[i] = e
 
     def buildheap(self):
-        """ 平局复杂度O(n) """
+        """
+        平均时间复杂度O(n)
+        空间复杂度O(1)
+        """
         end = len(self._elems)
         for i in range(end - 1, -1, -1):
             self.siftdown(self._elems[i], i, end)
