@@ -48,13 +48,13 @@ class Customs:
         return None
 
     def free_gate(self, i):
-        if i is not None and self.gates[i] == 1:
+        if self.gates[i] == 1:
             self.gates[i] = 0
         else:
             raise ValueError('Clear gate error.')
 
     def simulate(self):
-        Arrive(0, self)  # initially generate one car
+        Arrive(0, self)  # initsially generate one car
         self.simulation.run()
         self.statistics()
 
@@ -96,7 +96,6 @@ class Arrive(Event):
         i = customs.find_gate()  # 检查空闲通道
         # if not i: # 这里不能这么用，0会引发异常
         if i is not None:  # 有通道，进入检查
-
             event_log(time, 'car check')
             Leave(time + randint(*customs.check_interval), i, car, customs)
         else:
@@ -130,7 +129,7 @@ def event_log(time, name):
 
 
 if __name__ == '__main__':
-    car_arrive_interval = (1, 3)
+    car_arrive_interval = (1, 4)
     car_check_time = (3, 5)
     cus = Customs(3, 480, car_arrive_interval, car_check_time)
     cus.simulate()

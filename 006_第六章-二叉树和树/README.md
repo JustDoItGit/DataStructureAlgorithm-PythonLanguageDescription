@@ -4,3 +4,5 @@ stack_prio_que.py ------ 堆实现优先队列
 HeapSort.py ------ 堆排序  
 simulation.py ------ 通用事件模拟  
 customs.py ------ 海关检查站模拟  
+bin_tree_TNodes.py ------ 链接二叉树类  
+sQueue.py ------  环形顺序表实现队列类  
