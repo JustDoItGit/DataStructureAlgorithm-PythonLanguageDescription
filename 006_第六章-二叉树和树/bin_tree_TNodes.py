@@ -79,6 +79,32 @@ def preorder_nonrec(t_, proc):
         t_ = s.pop()
 
 
+# 通过生成器函数遍历二叉树
+def preorder_elements(t_):
+    s = SStack()
+    while t_ is not None or not s.is_empty():
+        while t_ is not None:
+            s.push(t_.right)
+            yield t_.dat
+            t_ = t_.left
+        t_ = s.pop()
+
+
+# 非递归的后根序遍历算法
+def postorder_nonrec(t_, proc):
+    s = SStack()
+    while t_ is not None or not s.is_empty():
+        while t_ is not None:  # 下行循环，直到栈顶的两个树空
+            s.push(t_)
+            t_ = t_.left if t_.left is not None else t_.right  # 注意这个条件表达式的意义：能左就左，否则向右一步
+        t_ = s.pop()  # 栈顶是访问结点
+        proc(t_.dat)
+        if not s.is_empty() and s.top().left == t_:
+            t_ = s.top().right  # 栈不空且当前结点是栈顶的左子结点
+        else:
+            t_ = None  # 没有右子树或右子树遍历完毕，强迫退栈
+
+
 if __name__ == '__main__':
     t = BinTNode(1, BinTNode(2), BinTNode(3))
     preorder(t, lambda x: print(x, end='  '))
@@ -93,3 +119,6 @@ if __name__ == '__main__':
     levelorder(t, lambda x: print(x, end='  '))
     print('\n非递归的先根序遍历二叉树: ', end='')
     preorder_nonrec(t, lambda x: print(x, end='  '))
+    print('\n通过生成器函数遍历二叉树: ', end='')
+    for i in preorder_elements(t):
+        print(i, end='  ')
