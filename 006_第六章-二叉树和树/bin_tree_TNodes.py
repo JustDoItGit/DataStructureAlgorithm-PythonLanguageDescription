@@ -122,3 +122,5 @@ if __name__ == '__main__':
     print('\n通过生成器函数遍历二叉树: ', end='')
     for i in preorder_elements(t):
         print(i, end='  ')
+    print('\n非递归的后根序遍历算法: ', end='')
+    postorder_nonrec(t, lambda x: print(x, end='  '))
