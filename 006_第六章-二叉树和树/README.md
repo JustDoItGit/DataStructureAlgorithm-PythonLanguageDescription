@@ -6,5 +6,6 @@ simulation.py ------ 通用事件模拟
 customs.py ------ 海关检查站模拟  
 bin_tree_TNodes.py ------ 链接二叉树类  
 sQueue.py ------  环形顺序表实现队列类  
-BinTree ------ 二叉树类  
-huff_man_tree ------ 哈夫曼树  
+BinTree.py ------ 二叉树类  
+huff_man_tree.py ------ 哈夫曼树  
+tree.py ------ 树的list实现  

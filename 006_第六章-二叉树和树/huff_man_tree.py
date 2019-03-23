@@ -3,6 +3,11 @@ from stack_prio_que import PrioQueue
 
 
 class HTNode(BinTNode):
+    """
+    时间复杂度：O(m*log(m))
+    空间复杂度：O(m)
+    """
+
     def __lt__(self, othernode):
         return self.dat < othernode.dat
 
