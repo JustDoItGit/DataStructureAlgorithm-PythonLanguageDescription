@@ -9,3 +9,4 @@ sQueue.py ------  环形顺序表实现队列类
 BinTree.py ------ 二叉树类  
 huff_man_tree.py ------ 哈夫曼树  
 tree.py ------ 树的list实现  
+tree_class.py ------ 定义树类  
